@@ -1,0 +1,3 @@
+Shape Class: Door
+Affordance: pull
+Positive labels: 196.49005126953125/2048

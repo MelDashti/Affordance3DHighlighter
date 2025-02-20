@@ -1,0 +1,3 @@
+Shape Class: Vase
+Affordance: contain
+Positive labels: 209.54251098632812/2048

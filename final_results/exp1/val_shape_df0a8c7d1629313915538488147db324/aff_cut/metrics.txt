@@ -1,0 +1,9 @@
+Validation shape ID: df0a8c7d1629313915538488147db324
+Affordance: cut
+Prompt strategy: affordance_specific
+LR: 0.001
+Depth: 4
+Num Augmentations: 1
+Num Views: 2
+Threshold: 0.0
+IoU: 0.501

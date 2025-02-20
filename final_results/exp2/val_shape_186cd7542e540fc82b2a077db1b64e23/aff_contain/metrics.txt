@@ -1,0 +1,10 @@
+Validation shape ID: 186cd7542e540fc82b2a077db1b64e23
+Affordance: contain
+Shape Class: Vase
+Prompt strategy: a
+LR: 0.001
+Depth: 4
+Num Augmentations: 3
+Num Views: 3
+Threshold: 0.3
+IoU: 0.109

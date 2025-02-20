@@ -1,0 +1,9 @@
+Validation shape ID: d3ba7967cea5550405f236096897d
+Affordance: cut
+Prompt strategy: basic
+LR: 0.001
+Depth: 4
+Num Augmentations: 3
+Num Views: 2
+Threshold: 0.62
+IoU: 0.5010

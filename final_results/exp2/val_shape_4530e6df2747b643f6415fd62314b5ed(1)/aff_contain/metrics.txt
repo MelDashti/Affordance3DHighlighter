@@ -1,0 +1,10 @@
+Validation shape ID: 4530e6df2747b643f6415fd62314b5ed
+Affordance: contain
+Shape Class: Bowl
+Prompt strategy: f
+LR: 0.001
+Depth: 5
+Num Augmentations: 1
+Num Views: 3
+Threshold: 0.3
+IoU: 0.529

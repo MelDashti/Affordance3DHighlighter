@@ -1,0 +1,3 @@
+Validation shape ID: 65892e0f7f93129d14cb807a24b99e1e
+All affordances: ['cut']
+Final shape mean IoU (averaged over 1 affs) = IoU for cut: 0.52318359375

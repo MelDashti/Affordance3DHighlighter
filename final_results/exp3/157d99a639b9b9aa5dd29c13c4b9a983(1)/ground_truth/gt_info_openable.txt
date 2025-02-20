@@ -1,0 +1,3 @@
+Shape Class: Door
+Affordance: openable
+Positive labels: 51.950050354003906/2048

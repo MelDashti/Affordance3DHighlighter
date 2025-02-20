@@ -1,0 +1,9 @@
+Validation shape ID: f649133ee152f0c4535dab46efb28e27
+Affordance: pushable
+Prompt strategy: basic
+LR: 0.0001
+Depth: 5
+Num Augmentations: 3
+Num Views: 2
+Threshold: 0.3
+IoU: 0.215

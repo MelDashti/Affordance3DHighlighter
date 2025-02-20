@@ -1,0 +1,3 @@
+Validation shape ID: 186cd7542e540fc82b2a077db1b64e23
+All affordances: ['contain']
+Final shape mean IoU (averaged over 1 affs) = 0.109

@@ -1,0 +1,3 @@
+Shape Class: Knife
+Affordance: cut
+Positive labels: 143.67787170410156/2048

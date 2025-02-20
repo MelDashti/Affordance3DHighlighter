@@ -1,0 +1,3 @@
+Shape Class: Bottle
+Affordance: contain
+Positive labels: 403.66290283203125/2048

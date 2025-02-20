@@ -2,7 +2,7 @@
 
 # **3D Neural Affordance Highlighter**
 
-![Project Preview](./data/projectbanner.png)  
+![Project Preview](./media/projectbanner.png)  
 
 ---
 

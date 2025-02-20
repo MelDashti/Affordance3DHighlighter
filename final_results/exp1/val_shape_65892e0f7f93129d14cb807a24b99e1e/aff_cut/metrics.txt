@@ -1,0 +1,9 @@
+Validation shape ID: 65892e0f7f93129d14cb807a24b99e1e
+Affordance: cut
+Prompt strategy: action
+LR: 0.001
+Depth: 4
+Num Augmentations: 3
+Num Views: 4
+Threshold: 0.12
+IoU: IoU for cut: 0.51318359375

@@ -1,0 +1,3 @@
+Shape Class: Bowl
+Affordance: contain
+Positive labels: 322.3775939941406/2048

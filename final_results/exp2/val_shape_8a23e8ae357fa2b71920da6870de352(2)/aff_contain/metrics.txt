@@ -1,0 +1,10 @@
+Validation shape ID: 8a23e8ae357fa2b71920da6870de352
+Affordance: contain
+Shape Class: Bottle
+Prompt strategy: a
+LR: 0.001
+Depth: 4
+Num Augmentations: 3
+Num Views: 3
+Threshold: 0.3
+IoU: 0.454
