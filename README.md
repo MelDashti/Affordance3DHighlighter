@@ -1,53 +1,155 @@
-# Affordance Highlighting project
 
 
-<!-- ### [[Project Page](https://threedle.github.io/3DHighlighter/)] [[ArXiv](https://arxiv.org/abs/2212.11263)] -->
-<a href="https://arxiv.org/abs/2212.11263"><img src="https://img.shields.io/badge/arXiv-3DHighlighter-b31b1b.svg" height=22.5></a>
-<a href="https://threedle.github.io/3DHighlighter"><img src="https://img.shields.io/website?down_color=lightgrey&down_message=offline&label=Project%20Page&up_color=lightgreen&up_message=online&url=https%3A%2F%2Fpals.ttic.edu%2Fp%2Fscore-jacobian-chaining" height=22.5></a>
+# **3D Neural Affordance Highlighter**
 
-![teaser](./media/teaser.png)
+![Project Preview](data\projectbanner.png)  
 
+---
 
-## Installation
+## **📌 Overview**
+This project extends the **3D Highlighter** framework to localize affordance regions in **3D point clouds** using **CLIP-based textual supervision**. It explores whether affordance regions on common household objects (e.g., doors, bottles, and knives) can be detected **without explicit 3D labels**, relying on **differentiable rendering, neural networks, and vision-language models**.
 
-Install and activate the conda environment with the following commands. 
+We experiment with different **prompting strategies**, **hyperparameter tuning**, and **evaluation metrics** to assess the effectiveness of **unsupervised affordance highlighting**.
+
+---
+
+## **📂 Repository Structure**
 ```
-conda env create --file 3DHighlighter.yml
-conda activate 3DHighlighter
+📦 Affordance3DHighlighter
+├── 📁 data/                  # Contains the AffordanceNet dataset and processed data files
+├── 📁 demo/                  # Example runs and output visualizations
+├── 📁 docs/                  # Project documentation, final report, and presentation slides
+├── 📁 images/                # Sample affordance visualizations
+├── 📁 media/                 # Additional project-related media
+├── 📁 src/                   # Source code for affordance highlighting
+│   ├── data_loader_fullshape.py      # Data loading and preprocessing
+│   ├── neural_highlighter.py         # Neural affordance highlighter architecture
+│   ├── render/cloud_point_renderer.py # Differentiable point cloud renderer
+│   ├── Clip/clip_model.py            # CLIP model integration
+│   ├── Clip/loss_function.py         # CLIP loss computation
+│   ├── save_results.py               # Functions to save visualizations and evaluations
+│   ├── prompt_strategies.py          # Different affordance-specific prompting strategies
+├── 3Dhighlighter_pointcloud_multiview.ipynb  # Main notebook for training and evaluation
+├── testingDataset.ipynb              # Additional dataset testing script
+├── point_cloud_visualization.ipynb    # Visualization notebook for 3D affordance highlighting
+├── extensions.ipynb                   # Code extensions and alternative configurations
+├── README.md                          # Project documentation
 ```
-Note: The installation will fail if run on something other than a CUDA GPU machine.
 
-#### System Requirements
-- Python 3.9
-- CUDA 11
-- 16 GB GPU
+---
 
-## Run Examples
-Run the scripts below to get example localizations.
+## **🎯 Project Goals**
+### **1️⃣ Unsupervised 3D Affordance Localization**
+- Detect **hand-object interaction affordances** in **point cloud representations** without labeled supervision.
+- Train a **Neural Highlighter model** that learns affordance-specific regions.
+
+### **2️⃣ Exploring Different Prompting Strategies**
+- Compare **basic**, **affordance-specific**, and **descriptive** prompts.
+- Evaluate the effectiveness of CLIP-generated affordance regions.
+
+### **3️⃣ Hyperparameter Optimization**
+- Grid search over:
+  - **Learning rates** (0.0001, 0.001, 0.01)
+  - **Network depths** (4, 5)
+  - **Number of views** (2, 3)
+  - **Augmentations** (1, 3)
+  - **Threshold values** (0.3, 0.5, 0.7)
+
+### **4️⃣ Performance Evaluation using Robust Metrics**
+- **IoU (Intersection over Union)** to assess segmentation accuracy.
+- **aIoU (affordance-weighted IoU)** to measure affordance-specific localization.
+- **CLIP-based similarity scores** to evaluate textual alignment.
+
+---
+
+## **📂 Dataset: 3D AffordanceNet**
+We utilize the **3D AffordanceNet** dataset, which contains:
+- **22,949 objects** from **23 semantic classes**.
+- **18 affordance labels** related to **hand-object interactions**.
+- **Pre-processed point clouds** with normalized coordinates.
+
+### **Training & Evaluation Setup**
+- **Validation and Test Splits**: Defined subsets from the dataset.
+- **Point Cloud Normalization**: Objects are centered and scaled.
+- **Rendered Views**: Differentiable rendering of point clouds for CLIP-based training.
+
+---
+
+## **🛠️ Methodology**
+### **🔹 Neural Highlighter Architecture**
+- An **MLP-based network** trained to predict affordance probabilities.
+- Uses **differentiable rendering** and **CLIP loss** for affordance learning.
+
+### **🔹 Differentiable Rendering**
+- **Multi-view point cloud projections** are generated using **Kaolin and PyTorch3D**.
+- **Rendered images** are aligned with **CLIP text embeddings** for affordance detection.
+
+### **🔹 Prompt-Based Training**
+- **Affordance-specific prompts** guide affordance highlighting.
+- **Descriptive and basic prompts** are compared for effectiveness.
+
+### **🔹 Optimization & Loss**
+- **Contrastive loss** computed between rendered affordance regions and CLIP text embeddings.
+- **Adam optimizer** with **grid-searched hyperparameters**.
+
+---
+
+## **📊 Experiments & Results**
+We perform **grid search validation** and **test evaluation** to optimize affordance highlighting.
+
+### **1️⃣ Single-Class Affordance Localization (Doors)**
+- **Target Affordances**: Openable, Pushable, Pull
+- **Best Configuration**:  
+  - **Strategy:** Affordance-Specific  
+  - **Threshold:** 0.5  
+  - **Learning Rate:** 0.001  
+  - **Validation IoU:** 0.441  
+
+### **2️⃣ Generalization to Unseen Objects**
+- The best model is **tested on new test objects**.
+- The **final test mIoU drops to 0.075**, indicating **overfitting**.
+
+### **3️⃣ Cross-Class Generalization (Optional)**
+- **Tested objects:** Chair, Bottle, Knife.
+- **Findings:** The affordance-specific strategy **struggles across different object geometries**.
+
+
+## **📥 Installation & Usage**
+### **🖥️ Setup**
+```bash
+pip install torch torchvision tqdm numpy open3d
+pip install git+https://github.com/openai/CLIP.git
+pip install kaolin==0.17.0 -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.5.1_cu121.html
+pip install pytorch3d
 ```
-# hat on a candle
-./demo/run_candle_hat.sh
-# hat on a dog
-./demo/run_dog_hat.sh
-# shoes on a horse
-./demo/run_horse_shoes.sh
+
+### **🚀 Running the Pipeline**
+#### **1️⃣ Training the Model**
+```bash
+python train.py --dataset_path data/full_shape_train_data.pkl --device cuda
 ```
 
-### Note on Reproducibility
-Due to small non-determinisms in CLIP's backward process and the sensitivity of our optimization, results can vary across different runs even when fully seeded. If the result of the optimization does not match the expected result, try re-running the optimization.
-
-## Tips for Troubleshooting New Mesh+Region Combinations:
-- Due to the sensitivity of the optimization process, if a mesh+prompt combination does not work on the first try, rerun the optimization with a new seed as it might just have found a bad local minimum.
-- If an initial specification of a region does not work well, try describing that region with more specific language (i.e. 'eyeglasses' instead of 'glasses'). Also, try using a different target localization text that might correspond to a similar region (i.e. using 'headphones' or 'earmuffs' instead of 'ears').
-- In our experiments, we found that using gray and highlighter colors and the prompt format of `"A 3D render of a gray [object] with highlighted [region]"` works best for most mesh+region combinations. However, we encourage users to edit the code to try different prompt specifications since different wordings might work better with new and different mesh+region combinations.
-- The traingulation of the mesh is important. Meshes containing long, skinny triangles and/or small numbers of vertices can lead to bad optimizations.
-
-## Citation
+#### **2️⃣ Running Validation Grid Search**
+```bash
+python evaluate.py --dataset_path data/val_set.pkl --strategy affordance_specific --threshold 0.5
 ```
-@article{decatur2022highlighter,
-    author = {Decatur, Dale and Lang, Itai and Hanocka, Rana},
-    title  = {3D Highlighter: Localizing Regions on 3D Shapes via Text Descriptions},
-    journal = {arXiv},
-    year = {2022}
-}
+
+#### **3️⃣ Testing the Best Model**
+```bash
+python test.py --test_data data/test_set.pkl --best_strategy affordance_specific --best_threshold 0.5
 ```
+
+---
+
+## **📌 Limitations & Future Work**
+### **Challenges**
+- **Localized affordances** (e.g., handles, hinges) are difficult to detect.
+- **CLIP struggles with spatial relationships**, affecting segmentation accuracy.
+- **Overfitting to validation objects** limits test generalization.
+
+### **Future Directions**
+- Explore **alternative models** such as **OpenShape**.
+- Incorporate **geometric priors** for better spatial alignment.
+- Experiment with **real-world LiDAR point clouds**.
+
+---
